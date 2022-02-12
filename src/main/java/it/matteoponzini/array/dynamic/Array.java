@@ -97,7 +97,7 @@ public class Array<T> implements Iterable<T>{
             arrayToString.append(this.get(i));
             if(i < size-1) arrayToString.append(",");
         }
-        arrayToString.append(" ]  }");
+        arrayToString.append(" ] }");
         return arrayToString.toString();
     }
 }
