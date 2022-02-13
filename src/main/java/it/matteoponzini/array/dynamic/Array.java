@@ -38,6 +38,24 @@ public class Array<T> implements Iterable<T>{
         array[index] = element;
     }
 
+    public void insert(T element, int index){
+        if(isValidIndex(index)) throw new IndexOutOfBoundsException();
+        if(array.length > size()){
+            for(int i = size()-1; i >= index; i--) array[i+1] = array[i];
+            array[index] = element;
+        } else {
+            Object[] newArray = new Object[array.length+1];
+            for (int i = 0; i < size(); i++) {
+                if(i >= index) {
+                    if(i == index) newArray[i] = element;
+                    newArray[i+1] = array[i];
+                } else newArray[i] = array[i];
+            }
+            this.array = (T[]) newArray;
+        }
+        size++;
+    }
+
     public T remove(Object element){
         int indexToRemove = indexOf(element);
         return (indexToRemove == -1) ? null : remove(indexToRemove);

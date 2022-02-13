@@ -254,4 +254,84 @@ class ArrayTest {
     }
 
 
+    @Test
+    void insertInPositionElement() {
+        Array<Car> cars = new Array<>(5);
+        cars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        Car fiatPunto = new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10));
+        cars.insert(fiatPunto,1);
+        Array<Car> expectedCars = new Array<>(4);
+        expectedCars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        for(int i = 0; i < cars.size(); i++){
+            assertEquals(expectedCars.get(i), cars.get(i));
+        }
+    }
+
+    @Test
+    void insertInPositionFirstElement() {
+        Array<Car> cars = new Array<>(5);
+        cars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        Car fiatPunto = new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10));
+        cars.insert(fiatPunto,0);
+        Array<Car> expectedCars = new Array<>(4);
+        expectedCars.add(new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        for(int i = 0; i < cars.size(); i++){
+            assertEquals(expectedCars.get(i), cars.get(i));
+        }
+    }
+
+
+    @Test
+    void insertInPositionLastElement() {
+        Array<Car> cars = new Array<>(5);
+        cars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        cars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        Car fiatPunto = new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10));
+        cars.insert(fiatPunto,3);
+        Array<Car> expectedCars = new Array<>(4);
+        expectedCars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        expectedCars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+        for(int i = 0; i < cars.size(); i++){
+            assertEquals(expectedCars.get(i), cars.get(i));
+        }
+    }
+
+//    @Test
+//    void insertInPositionGrowElement() {
+//        Array<Car> cars = new Array<>(4);
+//        cars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+//        cars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+//        cars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+//        cars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+//        Car fiatPunto = new Car("Fiat Punto", "ATX5421", LocalDate.of(2021, Month.APRIL,10));
+//        cars.insert(fiatPunto,1);
+//        Array<Car> expectedCars = new Array<>(4);
+//        expectedCars.add(new Car("Opel", "ATX514", LocalDate.of(2021, Month.APRIL,10)));
+//        expectedCars.add(new Car("OpelNew", "ATX514New", LocalDate.of(2021, Month.APRIL,10)));
+//        expectedCars.add(new Car("Fiat Multipla", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+//        expectedCars.add(new Car("Alfaromeo mito", "ATX5421", LocalDate.of(2021, Month.APRIL,10)));
+//        for(int i = 0; i < cars.size(); i++){
+//            assertEquals(expectedCars.get(i), cars.get(i));
+//        }
+//    }
+
 }
