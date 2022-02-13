@@ -44,43 +44,46 @@ public class Array<T> implements Iterable<T>{
             for(int i = size()-1; i >= index; i--) array[i+1] = array[i];
             array[index] = element;
         } else {
-            Object[] newArray = new Object[array.length+1];
-            for (int i = 0; i < size(); i++) {
-                if(i >= index) {
-                    if(i == index) newArray[i] = element;
-                    newArray[i+1] = array[i];
-                } else newArray[i] = array[i];
-            }
-            this.array = (T[]) newArray;
+            grow(array, array.length + 1, index, element);
         }
         size++;
     }
 
-    public T remove(Object element){
+    public T remove(Object element) {
         int indexToRemove = indexOf(element);
         return (indexToRemove == -1) ? null : remove(indexToRemove);
     }
 
-    public int indexOf(Object element){
-        for(int i = 0; i < size(); i++)
-            if(array[i] == element || element != null && element.equals(array[i])) return i;
+    public int indexOf(Object element) {
+        for (int i = 0; i < size(); i++)
+            if (array[i] == element || element != null && element.equals(array[i])) return i;
         return -1;
     }
 
-    public T remove(int index){
-        if(isValidIndex(index)) throw new IndexOutOfBoundsException();
+    public T remove(int index) {
+        if (isValidIndex(index)) throw new IndexOutOfBoundsException();
         T element = array[index];
-        for(int i = 1; i <= (size()-1) - index; i++) array[index+ (i -1)] = array[index+i];
-        array[size()-1] = null;
+        for (int i = 1; i <= (size() - 1) - index; i++) array[index + (i - 1)] = array[index + i];
+        array[size() - 1] = null;
         size--;
         return element;
     }
 
     private void grow(T[] array, int newCapacity) {
+        grow(array, newCapacity, null, null);
+    }
+
+    private void grow(T[] array, int newCapacity, Integer index, T element) {
         Object[] newArray = new Object[newCapacity];
-        for (int i = 0; i < size(); i++) newArray[i] = array[i];
+        for (int i = 0; i < size(); i++) {
+            if (index != null && i >= index) {
+                if (i == index) newArray[i] = element;
+                newArray[i + 1] = array[i];
+            } else newArray[i] = array[i];
+        }
         this.array = (T[]) newArray;
     }
+
 
     private boolean isValidIndex(int index){ return index>= size() || index < 0; }
 
