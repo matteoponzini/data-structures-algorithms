@@ -2,46 +2,57 @@ package it.matteoponzini.array.dynamic;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 @SuppressWarnings("unchecked")
-public class Array<T> implements Iterable<T>{
+public class Array<T> implements Iterable<T> {
     private int size = 0;
     private T[] array;
-    private static final int INITIALIZE_CAPACITY = 16;
+    private static final int INIT_CAPACITY = 16;
 
-    public Array(int capacity) {array = (T[]) new Object[capacity];}
+    public Array(int capacity) {
+        array = (T[]) new Object[capacity];
+    }
 
-    public Array(){ this(INITIALIZE_CAPACITY); }
+    public Array() {
+        this(INIT_CAPACITY);
+    }
 
     public Array(List<T> array) {
-        this.array = (T[]) new Object[array.size()+10];
-        grow((T[]) array.toArray(), array.size()+10);
+        this.array = (T[]) new Object[array.size() + 10];
+        grow((T[]) array.toArray(), array.size() + 10);
         size = array.size();
     }
 
-    public int size(){return size; }
+    public int size() {
+        return size;
+    }
 
-    public boolean isEmpty(){return size == 0; }
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-    public void add(T element){
-        if(size() +1 >= array.length) grow(array,size()+10);
+    public void add(T element) {
+        if (size() + 1 >= array.length) grow(array, size() + 10);
         array[size++] = element;
     }
 
-    public T get(int index){
-        if(isValidIndex(index)) throw new IndexOutOfBoundsException();
+    public T get(int index) {
+        if (isValidIndex(index)) throw new IndexOutOfBoundsException();
         return array[index];
     }
 
-    public void set(T element, int index){
-        if(isValidIndex(index)) throw new IndexOutOfBoundsException();
+    public T set(T element, int index) {
+        if (isValidIndex(index)) throw new IndexOutOfBoundsException();
+        T oldElement = array[index];
         array[index] = element;
+        return oldElement;
     }
 
-    public void insert(T element, int index){
-        if(isValidIndex(index)) throw new IndexOutOfBoundsException();
-        if(array.length > size()){
-            for(int i = size()-1; i >= index; i--) array[i+1] = array[i];
+    public void insert(T element, int index) {
+        if (isValidIndex(index)) throw new IndexOutOfBoundsException();
+        if (array.length > size()) {
+            for (int i = size() - 1; i >= index; i--) array[i + 1] = array[i];
             array[index] = element;
         } else {
             grow(array, array.length + 1, index, element);
@@ -85,7 +96,13 @@ public class Array<T> implements Iterable<T>{
     }
 
 
-    private boolean isValidIndex(int index){ return index>= size() || index < 0; }
+    private boolean isValidIndex(int index) {
+        return index >= size() || index < 0;
+    }
+
+    public void sorting(Consumer<Array<T>> consumer) {
+        consumer.accept(this);
+    }
 
     @Override
     public Iterator<T> iterator() {

@@ -1,28 +1,30 @@
 package it.matteoponzini.array.dynamic;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 
 class ArrayTest {
 
-    record Car(String name, String plate, LocalDate year){}
+    record Car(String name, String plate, LocalDate year) {
+    }
 
     @Test
     void instanceFromArray() {
         List<Car> carsList = Arrays.asList(
-                new Car("VW Polo", "ATX514", LocalDate.of(2021, Month.APRIL,10)),
-                new Car("VW Golf", "ATX514", LocalDate.of(2021, Month.APRIL,10)),
-                new Car("VW Turan", "ATX514", LocalDate.of(2021, Month.APRIL,10)),
-                new Car("VW Gtx", "ATX514", LocalDate.of(2021, Month.APRIL,10)),
-                new Car("VW Master", "ATX514", LocalDate.of(2021, Month.APRIL,10)),
-                new Car("VW Das", "ATX514", LocalDate.of(2021, Month.APRIL,10)),
-                new Car("VW", "ATX514", LocalDate.of(2021, Month.APRIL,10))
+                new Car("VW Polo", "ATX514", LocalDate.of(2021, Month.APRIL, 10)),
+                new Car("VW Golf", "ATX514", LocalDate.of(2021, Month.APRIL, 10)),
+                new Car("VW Turan", "ATX514", LocalDate.of(2021, Month.APRIL, 10)),
+                new Car("VW Gtx", "ATX514", LocalDate.of(2021, Month.APRIL, 10)),
+                new Car("VW Master", "ATX514", LocalDate.of(2021, Month.APRIL, 10)),
+                new Car("VW Das", "ATX514", LocalDate.of(2021, Month.APRIL, 10)),
+                new Car("VW", "ATX514", LocalDate.of(2021, Month.APRIL, 10))
         );
 
         Array<Car> cars = new Array<>(carsList);
@@ -333,5 +335,28 @@ class ArrayTest {
 //            assertEquals(expectedCars.get(i), cars.get(i));
 //        }
 //    }
+
+
+    @Test
+    void basicOrder() {
+        Array<Integer> ints = new Array<>(5);
+        ints.add(40);
+        ints.add(10);
+        ints.add(20);
+        ints.add(90);
+        ints.add(2);
+        ints.sorting(obj -> {
+            for (int i = 1; i < obj.size(); i++) {
+                Integer element = obj.get(i);
+                int j = i;
+                while (j > 0 && obj.get(j - 1) > element) {
+                    obj.set(obj.get(j - 1), j);
+                    j--;
+                }
+                obj.set(element, j);
+            }
+        });
+        assertEquals("{ size = 5, array = [ 2,10,20,40,90 ] }", ints);
+    }
 
 }
