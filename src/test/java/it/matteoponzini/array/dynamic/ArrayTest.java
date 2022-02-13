@@ -337,26 +337,26 @@ class ArrayTest {
 //    }
 
 
-    @Test
-    void basicOrder() {
-        Array<Integer> ints = new Array<>(5);
-        ints.add(40);
-        ints.add(10);
-        ints.add(20);
-        ints.add(90);
-        ints.add(2);
-        ints.sorting(obj -> {
-            for (int i = 1; i < obj.size(); i++) {
-                Integer element = obj.get(i);
-                int j = i;
-                while (j > 0 && obj.get(j - 1) > element) {
-                    obj.set(obj.get(j - 1), j);
-                    j--;
-                }
-                obj.set(element, j);
-            }
-        });
-        assertEquals("{ size = 5, array = [ 2,10,20,40,90 ] }", ints);
-    }
+//    @Test
+//    void basicOrder() {
+//        Array<Integer> ints = new Array<>(5);
+//        ints.add(40);
+//        ints.add(10);
+//        ints.add(20);
+//        ints.add(90);
+//        ints.add(2);
+//        ints.sorting(obj -> {
+//            for (int i = 1; i < obj.size(); i++) {
+//                Integer element = obj.get(i);
+//                int j = i;
+//                while (j > 0 && obj.get(j - 1) > element) {
+//                    obj.set(obj.get(j - 1), j);
+//                    j--;
+//                }
+//                obj.set(element, j);
+//            }
+//        });
+//        assertEquals("{ size = 5, array = [ 2,10,20,40,90 ] }", ints);
+//    }
 
 }
